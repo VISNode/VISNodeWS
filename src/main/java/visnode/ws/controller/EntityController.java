@@ -41,4 +41,24 @@ public class EntityController {
         }
     }
 
+    /**
+     * Returns entity data
+     *
+     * @param entity
+     * @param id
+     * @return ResponseEntity
+     */
+    @RequestMapping(value = "/{entity}/{id}", method = RequestMethod.GET)
+    public ResponseEntity get(@PathVariable("entity") String entity, @PathVariable("id") long id) {
+        try {
+            Object obj = repository.get(entity, id);
+            if (obj == null) {
+                return new ResponseEntity(HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity(obj, HttpStatus.OK);
+        } catch (DatabaseException ex) {
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        }
+    }
+
 }

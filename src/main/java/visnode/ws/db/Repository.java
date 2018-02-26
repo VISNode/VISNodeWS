@@ -16,4 +16,14 @@ public interface Repository {
      */
     public List get(String entity) throws DatabaseException;
 
+    /**
+     * Returns the entity result
+     * 
+     * @param entity
+     * @param id
+     * @return List
+     * @throws DatabaseException
+     */
+    public Object get(String entity, long id) throws DatabaseException;
+
 }

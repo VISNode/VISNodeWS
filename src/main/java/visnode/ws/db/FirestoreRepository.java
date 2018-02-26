@@ -49,4 +49,25 @@ public class FirestoreRepository implements Repository {
         }
     }
 
+    /**
+     * Returns the entity result
+     *
+     * @param entity
+     * @return List
+     * @throws DatabaseException
+     */
+    @Override
+    public Object get(String entity, long id) throws DatabaseException {
+        try {
+            ApiFuture<QuerySnapshot> query = db.get().collection(entity).whereEqualTo("id", id).get();
+            List<QueryDocumentSnapshot> documents = query.get().getDocuments();
+            if (documents.isEmpty()) {
+                return null;
+            }
+            return documents.get(0).getData();
+        } catch (Exception e) {
+            throw new DatabaseException(e);
+        }
+    }
+
 }
