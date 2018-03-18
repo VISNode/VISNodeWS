@@ -23,7 +23,6 @@ public class EntityController {
     @Autowired
     public EntityController(EntityIntances instances) {
         this.instances = instances;
-
     }
 
     /**

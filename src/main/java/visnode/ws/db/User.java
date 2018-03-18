@@ -15,6 +15,8 @@ public class User implements Serializable {
     private long id;
     /** Name */
     private String name;
+    /** Password */
+    private String password;
 
     /**
      * Returns the id
@@ -50,6 +52,24 @@ public class User implements Serializable {
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * Returns the password
+     *
+     * @return String
+     */
+    public String getPassword() {
+        return password;
+    }
+
+    /**
+     * Sets the password
+     *
+     * @param password
+     */
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 }
