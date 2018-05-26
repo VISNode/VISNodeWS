@@ -3,8 +3,11 @@ package visnode.ws.db;
 import com.google.gson.Gson;
 import java.util.List;
 import java.util.Optional;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.springframework.core.GenericTypeResolver;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.domain.Specification;
 
 /**
  * Service responsible for the entity manipulation
@@ -14,13 +17,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public abstract class AbsDBService<O> implements DBService<O> {
 
     /** Data repository */
-    private final JpaRepository<O, Long> repository;
+    private final Repository<O, Long> repository;
     /** The entity class */
     private final Class classEntity;
     /** Json parser */
     private final Gson gson;
 
-    public AbsDBService(JpaRepository<O, Long> repository) {
+    public AbsDBService(Repository<O, Long> repository) {
         this.repository = repository;
         this.classEntity = getClassEntity();
         this.gson = new Gson();
@@ -47,6 +50,20 @@ public abstract class AbsDBService<O> implements DBService<O> {
         return repository.findAll();
     }
 
+    /**
+     * Find all
+     *
+     * @param query
+     * @return {@code List<O>}
+     */
+    @Override
+    public List<O> findAll(String query) {
+        if (query == null) {
+            return findAll();
+        }
+        return repository.findAll(new QuerySpecification(query));
+    }
+    
     /**
      * Find by id
      *

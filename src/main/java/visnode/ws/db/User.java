@@ -1,6 +1,7 @@
 package visnode.ws.db;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -12,10 +13,13 @@ public class User implements Serializable {
 
     /** Id */
     @Id
+    @Column
     private long id;
     /** Name */
+    @Column
     private String name;
     /** Password */
+    @Column
     private String password;
 
     /**

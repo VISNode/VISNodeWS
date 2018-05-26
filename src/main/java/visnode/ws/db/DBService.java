@@ -18,6 +18,14 @@ public interface DBService<O> {
     public List<O> findAll();
 
     /**
+     * Find all
+     *
+     * @param query
+     * @return {@code List<O>}
+     */    
+    public List<O> findAll(String query);
+    
+    /**
      * Find by id
      *
      * @param id
