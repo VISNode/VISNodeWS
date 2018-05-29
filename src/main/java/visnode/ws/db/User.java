@@ -21,6 +21,9 @@ public class User implements Serializable {
     /** Password */
     @Column
     private String password;
+    /** Points */
+    @Column
+    private int xp;
 
     /**
      * Returns the id
@@ -74,6 +77,24 @@ public class User implements Serializable {
      */
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    /**
+     * Returns the points
+     *
+     * @return int
+     */
+    public int getXp() {
+        return xp;
+    }
+
+    /**
+     * Sets the points
+     *
+     * @param xp
+     */
+    public void setXp(int xp) {
+        this.xp = xp;
     }
 
 }

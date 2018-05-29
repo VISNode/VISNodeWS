@@ -21,7 +21,9 @@ public class ChallengeUser implements Serializable {
     /** Submission */
     @Column(length = 60000)
     private String submission;
-
+    /** Points */
+    private int xp;
+    
     /**
      * Returns the id
      *
@@ -93,5 +95,23 @@ public class ChallengeUser implements Serializable {
     public void setSubmission(String submission) {
         this.submission = submission;
     }
+    
+    /**
+     * Returns the points
+     * 
+     * @return int
+     */
+    public int getXp() {
+        return xp;
+    }
 
+    /**
+     * Sets the points
+     * 
+     * @param xp 
+     */
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+    
 }
