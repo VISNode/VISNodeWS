@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 
 /**
  * The user service
@@ -32,6 +33,16 @@ public class UserService extends AbsDBService<User> {
             return Optional.of(user);
         }
         return obj;
+    }
+
+    @Override
+    public User save(User obj) {
+        if (obj.getId() == 0) {
+            obj.setPassword(DigestUtils.
+                    md5DigestAsHex(obj.getPassword().getBytes())
+            );
+        }
+        return super.save(obj);
     }
 
 }

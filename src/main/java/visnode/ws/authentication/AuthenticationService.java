@@ -2,6 +2,7 @@ package visnode.ws.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
 import visnode.ws.db.User;
 import visnode.ws.db.UserRepository;
 
@@ -37,7 +38,8 @@ public class AuthenticationService {
         if (model == null) {
             return false;
         }
-        return model.getPassword().equals(password);
+        String md5 = DigestUtils.md5DigestAsHex(password.getBytes());
+        return model.getPassword().equals(md5);
     }
 
 }

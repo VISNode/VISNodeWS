@@ -3,11 +3,7 @@ package visnode.ws.db;
 import com.google.gson.Gson;
 import java.util.List;
 import java.util.Optional;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import org.springframework.core.GenericTypeResolver;
-import org.springframework.data.jpa.domain.Specification;
 
 /**
  * Service responsible for the entity manipulation
@@ -83,7 +79,18 @@ public abstract class AbsDBService<O> implements DBService<O> {
      */
     @Override
     public O save(String json) {
-        return repository.save((O) gson.fromJson(json, classEntity));
+        return save((O) gson.fromJson(json, classEntity));
+    }
+    
+    /**
+     * Save
+     *
+     * @param obj Object
+     * @return O
+     */
+    @Override
+    public O save(O obj) {
+        return repository.save(obj);
     }
 
 }
