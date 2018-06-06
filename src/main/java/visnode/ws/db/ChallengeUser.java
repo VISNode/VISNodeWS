@@ -1,9 +1,11 @@
 package visnode.ws.db;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 /**
  * Challenge User
@@ -23,7 +25,13 @@ public class ChallengeUser implements Serializable {
     private String submission;
     /** Points */
     private int xp;
-    
+    /** Date initial */
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dateInitial;
+    /** Date final */
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    private Date dateFinal;
+
     /**
      * Returns the id
      *
@@ -95,10 +103,10 @@ public class ChallengeUser implements Serializable {
     public void setSubmission(String submission) {
         this.submission = submission;
     }
-    
+
     /**
      * Returns the points
-     * 
+     *
      * @return int
      */
     public int getXp() {
@@ -107,11 +115,47 @@ public class ChallengeUser implements Serializable {
 
     /**
      * Sets the points
-     * 
-     * @param xp 
+     *
+     * @param xp
      */
     public void setXp(int xp) {
         this.xp = xp;
     }
-    
+
+    /**
+     * Returns the initial date
+     *
+     * @return Date
+     */
+    public Date getDateInitial() {
+        return dateInitial;
+    }
+
+    /**
+     * Sets the initial date
+     *
+     * @param dateInitial
+     */
+    public void setDateInitial(Date dateInitial) {
+        this.dateInitial = dateInitial;
+    }
+
+    /**
+     * Returns the final date
+     *
+     * @return Date
+     */
+    public Date getDateFinal() {
+        return dateFinal;
+    }
+
+    /**
+     * Sets the final date
+     *
+     * @param dateFinal
+     */
+    public void setDateFinal(Date dateFinal) {
+        this.dateFinal = dateFinal;
+    }
+
 }

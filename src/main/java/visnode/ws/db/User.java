@@ -30,6 +30,9 @@ public class User implements Serializable {
     /** Points */
     @Column
     private int xp;
+    /** Institution */
+    @Column
+    private String institution;
 
     /**
      * Returns the id
@@ -103,4 +106,21 @@ public class User implements Serializable {
         this.xp = xp;
     }
 
+    /**
+     * Returns the institution
+     *
+     * @return String
+     */
+    public String getInstitution() {
+        return institution;
+    }
+
+    /**
+     * Sets the institution
+     *
+     * @param institution
+     */
+    public void setInstitution(String institution) {
+        this.institution = institution;
+    }
 }
