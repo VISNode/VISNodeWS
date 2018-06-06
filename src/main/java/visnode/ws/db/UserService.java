@@ -12,8 +12,11 @@ import org.springframework.util.DigestUtils;
 @Service
 public class UserService extends AbsDBService<User> {
 
+    private final UserRepository repository;
+
     public UserService(UserRepository repository) {
         super(repository);
+        this.repository = repository;
     }
 
     @Override
@@ -37,12 +40,36 @@ public class UserService extends AbsDBService<User> {
 
     @Override
     public User save(User obj) {
-        if (obj.getId() == 0) {
+        if (isNewUser(obj) && hasPassword(obj)) {
+            User user = repository.findByName(obj.getName());
+            if (user != null) {
+                throw new DatabaseException("User is already in the database");
+            }
             obj.setPassword(DigestUtils.
                     md5DigestAsHex(obj.getPassword().getBytes())
             );
         }
         return super.save(obj);
+    }
+
+    /**
+     * Returns true if it is a new user
+     *
+     * @param obj
+     * @return boolean
+     */
+    private boolean isNewUser(User obj) {
+        return obj.getId() == 0;
+    }
+
+    /**
+     * Returns true if the user has a password
+     *
+     * @param obj
+     * @return boolean
+     */
+    private boolean hasPassword(User obj) {
+        return obj.getPassword() != null && !obj.getPassword().isEmpty();
     }
 
 }

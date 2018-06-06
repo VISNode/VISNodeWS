@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * User
@@ -16,10 +18,14 @@ public class User implements Serializable {
     @Column
     private long id;
     /** Name */
-    @Column
+    @Column(unique = true)
+    @NotNull
+    @NotEmpty
     private String name;
     /** Password */
     @Column
+    @NotNull
+    @NotEmpty
     private String password;
     /** Points */
     @Column

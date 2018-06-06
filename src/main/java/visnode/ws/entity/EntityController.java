@@ -1,9 +1,14 @@
 package visnode.ws.entity;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import javax.persistence.RollbackException;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,11 +76,8 @@ public class EntityController {
      */
     @RequestMapping(value = "/{entity}", method = RequestMethod.POST)
     public ResponseEntity post(@PathVariable("entity") String entity, @RequestBody String object) {
-        try {
-            return new ResponseEntity(instances.get(entity).save(object), HttpStatus.OK);
-        } catch (Exception ex) {
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        }
+        return new ResponseEntity(instances.get(entity).save(object), HttpStatus.OK);
     }
+
 
 }
