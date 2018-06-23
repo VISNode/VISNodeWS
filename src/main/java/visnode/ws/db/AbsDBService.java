@@ -92,5 +92,27 @@ public abstract class AbsDBService<O> implements DBService<O> {
     public O save(O obj) {
         return repository.save(obj);
     }
+    
+    /**
+     * Save
+     *
+     * @param json Data String
+     * @return O
+     */
+    @Override
+    public O update(String json) {
+        return update((O) gson.fromJson(json, classEntity));
+    }
+    
+    /**
+     * Save
+     *
+     * @param obj Object
+     * @return O
+     */
+    @Override
+    public O update(O obj) {
+        return repository.save(obj);
+    } 
 
 }

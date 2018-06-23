@@ -33,6 +33,9 @@ public class User implements Serializable {
     /** Institution */
     @Column
     private String institution;
+    /** Image */
+    @Column
+    private String image;
 
     /**
      * Returns the id
@@ -123,4 +126,23 @@ public class User implements Serializable {
     public void setInstitution(String institution) {
         this.institution = institution;
     }
+
+    /**
+     * Returns the image
+     *
+     * @return String
+     */
+    public String getImage() {
+        return image;
+    }
+
+    /**
+     * Sets the user image
+     *
+     * @param image
+     */
+    public void setImage(String image) {
+        this.image = image;
+    }
+
 }

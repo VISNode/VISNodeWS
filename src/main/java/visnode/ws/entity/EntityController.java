@@ -74,5 +74,17 @@ public class EntityController {
         return new ResponseEntity(instances.get(entity).save(object), HttpStatus.OK);
     }
 
+    /**
+     * Returns entity data
+     *
+     * @param entity
+     * @param id
+     * @param object
+     * @return ResponseEntity
+     */
+    @RequestMapping(value = "/{entity}/{id}", method = RequestMethod.POST)
+    public ResponseEntity post(@PathVariable("entity") String entity, @PathVariable("id") long id, @RequestBody String object) {
+        return new ResponseEntity(instances.get(entity).update(object), HttpStatus.OK);
+    }
 
 }

@@ -48,4 +48,20 @@ public interface DBService<O> {
      * @return O
      */
     public O save(String json);
+
+    /**
+     * Save
+     *
+     * @param obj Object
+     * @return O
+     */
+    public O update(O obj);
+    
+    /**
+     * Update
+     *
+     * @param json Data String
+     * @return O
+     */
+    public O update(String json);
 }

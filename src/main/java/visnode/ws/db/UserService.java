@@ -12,6 +12,9 @@ import org.springframework.util.DigestUtils;
 @Service
 public class UserService extends AbsDBService<User> {
 
+    /** Password */
+    private static final String MASK = "***";
+    /** User repository */
     private final UserRepository repository;
 
     public UserService(UserRepository repository) {
@@ -22,7 +25,15 @@ public class UserService extends AbsDBService<User> {
     @Override
     public List<User> findAll() {
         return super.findAll().stream().map((user) -> {
-            user.setPassword("***");
+            user.setPassword(MASK);
+            return user;
+        }).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<User> findAll(String query) {
+        return super.findAll(query).stream().map((user) -> {
+            user.setPassword(MASK);
             return user;
         }).collect(Collectors.toList());
     }
@@ -32,7 +43,7 @@ public class UserService extends AbsDBService<User> {
         Optional<User> obj = super.findById(id);
         if (obj.isPresent()) {
             User user = obj.get();
-            user.setPassword("***");
+            user.setPassword(MASK);
             return Optional.of(user);
         }
         return obj;
@@ -50,6 +61,21 @@ public class UserService extends AbsDBService<User> {
             );
         }
         return super.save(obj);
+    }
+
+    @Override
+    public User update(User obj) {
+        if (hasPassword(obj)) {
+            if (obj.getPassword().equals(MASK)) {
+                User user = repository.findByName(obj.getName());
+                obj.setPassword(user.getPassword());
+            } else {
+                obj.setPassword(DigestUtils.
+                        md5DigestAsHex(obj.getPassword().getBytes())
+                );
+            }
+        }
+        return super.update(obj);
     }
 
     /**
