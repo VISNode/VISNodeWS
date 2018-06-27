@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
@@ -16,8 +18,10 @@ public class ChallengeUser implements Serializable {
     /** Id */
     @Id
     private long id;
+    @ManyToOne
+    @JoinColumn(name = "user", nullable = false)
     /** User */
-    private String user;
+    private User user;
     /** Challenge */
     private int idChallenge;
     /** Submission */
@@ -31,6 +35,8 @@ public class ChallengeUser implements Serializable {
     /** Date final */
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date dateFinal;
+    /** Status */
+    private int status;
 
     /**
      * Returns the id
@@ -53,9 +59,9 @@ public class ChallengeUser implements Serializable {
     /**
      * Returns the user
      *
-     * @return String
+     * @return User
      */
-    public String getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -64,7 +70,7 @@ public class ChallengeUser implements Serializable {
      *
      * @param user
      */
-    public void setUser(String user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
@@ -156,6 +162,24 @@ public class ChallengeUser implements Serializable {
      */
     public void setDateFinal(Date dateFinal) {
         this.dateFinal = dateFinal;
+    }
+
+    /**
+     * Returns the status
+     *
+     * @return int
+     */
+    public int getStatus() {
+        return status;
+    }
+
+    /**
+     * Sets the status
+     *
+     * @param status
+     */
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }

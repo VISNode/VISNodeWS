@@ -13,7 +13,7 @@ import org.springframework.util.DigestUtils;
 public class UserService extends AbsDBService<User> {
 
     /** Password */
-    private static final String MASK = "***";
+    public static final String MASK = "***";
     /** User repository */
     private final UserRepository repository;
 
@@ -60,6 +60,7 @@ public class UserService extends AbsDBService<User> {
                     md5DigestAsHex(obj.getPassword().getBytes())
             );
         }
+        obj.setUserVisitor();
         return super.save(obj);
     }
 

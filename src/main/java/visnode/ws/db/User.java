@@ -13,6 +13,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class User implements Serializable {
 
+    private transient static final int ROLE_EDITOR = 1;
+    private transient static final int ROLE_VISITOR = 2;
+
     /** Id */
     @Id
     @Column
@@ -36,6 +39,9 @@ public class User implements Serializable {
     /** Image */
     @Column
     private String image;
+    /** Role */
+    @Column
+    private int role;
 
     /**
      * Returns the id
@@ -143,6 +149,31 @@ public class User implements Serializable {
      */
     public void setImage(String image) {
         this.image = image;
+    }
+
+    /**
+     * Returns the role
+     *
+     * @return int
+     */
+    public int getRole() {
+        return role;
+    }
+
+    /**
+     * Sets the role
+     *
+     * @param role
+     */
+    public void setRole(int role) {
+        this.role = role;
+    }
+
+    /**
+     * Sets the user visitor
+     */
+    public void setUserVisitor() {
+        this.role = ROLE_VISITOR;
     }
 
 }
