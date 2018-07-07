@@ -1,6 +1,5 @@
 package visnode.ws.db;
 
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -34,10 +33,31 @@ public class QuerySpecification<T> implements Specification<T> {
                 (Predicate[]) Stream.of(query.split(" and ")).
                         map((instruction) -> {
                             String[] values = instruction.split(" eq ");
-                            return cb.equal(root.get(values[0]), values[1]);
+                            String key = values[0];
+                            String value = values[1];
+                            try {
+                                if (!key.contains(".")) {
+                                    return cb.equal(root.get(key), value);
+                                }
+                                String[] keys = key.split("\\.");
+                                Object obj = Class.
+                                        forName("visnode.ws.db." + capitalize(keys[0])
+                                        ).newInstance();
+                                obj.getClass().
+                                        getDeclaredMethod("set" + capitalize(keys[1]), Long.class).
+                                        invoke(obj, Long.parseLong(value));
+                                return cb.equal(root.get("user"), obj);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            return cb.equal(root.get(key), value);
                         }).
                         collect(Collectors.toList()).
                         toArray(new Predicate[]{})
         );
+    }
+
+    private String capitalize(final String line) {
+        return Character.toUpperCase(line.charAt(0)) + line.substring(1);
     }
 }

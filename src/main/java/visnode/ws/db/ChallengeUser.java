@@ -1,5 +1,6 @@
 package visnode.ws.db;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
@@ -14,7 +15,9 @@ import javax.persistence.Temporal;
  */
 @Entity
 public class ChallengeUser implements Serializable {
-
+    
+    public static transient final int STATUS_SUCESS = 1;
+    
     /** Id */
     @Id
     private long id;
@@ -31,9 +34,11 @@ public class ChallengeUser implements Serializable {
     private int xp;
     /** Date initial */
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private Date dateInitial;
     /** Date final */
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss'Z'")
     private Date dateFinal;
     /** Status */
     private int status;

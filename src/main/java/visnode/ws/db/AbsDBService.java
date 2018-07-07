@@ -68,7 +68,7 @@ public abstract class AbsDBService<O> implements DBService<O> {
      */
     @Override
     public Optional<O> findById(long id) {
-        return repository.findById(id);
+        return Optional.of(repository.findOne(id));
     }
 
     /**

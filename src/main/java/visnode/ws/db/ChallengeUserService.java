@@ -37,9 +37,11 @@ public class ChallengeUserService extends AbsDBService<ChallengeUser> {
     @Override
     public ChallengeUser save(String json) {
         ChallengeUser challengeUser = super.save(json);
-        User user = userRepository.findByName(challengeUser.getUser().getName());
-        user.setXp(user.getXp() + challengeUser.getXp());
-        userRepository.save(user);
+        if (challengeUser.getStatus() == ChallengeUser.STATUS_SUCESS) {
+            User user = userRepository.findByName(challengeUser.getUser().getName());
+            user.setXp(user.getXp() + challengeUser.getXp());
+            userRepository.save(user);
+        }
         return challengeUser;
     }
 
