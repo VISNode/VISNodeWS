@@ -6,16 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * Challenge
+ * Mission
  */
 @Entity
-public class Challenge implements Serializable {
+public class Mission implements Serializable {
 
     /** Id */
     @Id
     private Long id;
-    /** Id mission */
-    private long idMission;
     /** Level */
     @Column
     private int level;
@@ -39,24 +37,6 @@ public class Challenge implements Serializable {
     }
 
     /**
-     * Returns the mission id
-     *
-     * @return long
-     */
-    public long getIdMission() {
-        return idMission;
-    }
-
-    /**
-     * Sets the mission id
-     *
-     * @param idMission
-     */
-    public void setIdMission(long idMission) {
-        this.idMission = idMission;
-    }
-
-    /**
      * Returns the level
      *
      * @return int
@@ -73,5 +53,4 @@ public class Challenge implements Serializable {
     public void setLevel(int level) {
         this.level = level;
     }
-
 }
