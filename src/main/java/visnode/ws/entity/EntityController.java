@@ -86,5 +86,5 @@ public class EntityController {
     public ResponseEntity post(@PathVariable("entity") String entity, @PathVariable("id") long id, @RequestBody String object) {
         return new ResponseEntity(instances.get(entity).update(object), HttpStatus.OK);
     }
-
+    
 }
