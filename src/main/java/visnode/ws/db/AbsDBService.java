@@ -114,5 +114,15 @@ public abstract class AbsDBService<O> implements DBService<O> {
     public O update(O obj) {
         return repository.save(obj);
     } 
+    
+    /**
+     * Save
+     *
+     * @param obj Object
+     */
+    @Override
+    public void delete(O obj) {
+        repository.delete(obj);
+    } 
 
 }

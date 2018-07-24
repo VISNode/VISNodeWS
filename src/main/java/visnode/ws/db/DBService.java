@@ -64,4 +64,11 @@ public interface DBService<O> {
      * @return O
      */
     public O update(String json);
+    
+    /**
+     * Delete
+     *
+     * @param obj Object
+     */
+    public void delete(O obj);
 }

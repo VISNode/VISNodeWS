@@ -1,9 +1,12 @@
 package visnode.ws.db;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Mission
@@ -13,17 +16,34 @@ public class Mission implements Serializable {
 
     /** Id */
     @Id
-    private Long id;
+    @GeneratedValue
+    @Column
+    private long id;
+    /** name */
+    @Column
+    private String name;
+    /** Description */
+    @Column
+    private String description;
+    /** Problem */
+    @Column
+    private String problem;
+    /** Point */
+    @Column
+    private int xp;
     /** Level */
     @Column
     private int level;
+    /** Challenges */
+    @OneToMany(mappedBy = "mission")
+    private List<Challenge> challenge;
 
     /**
      * Returns the id
      *
-     * @return Long
+     * @return long
      */
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -32,8 +52,80 @@ public class Mission implements Serializable {
      *
      * @param id
      */
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
+    }
+
+    /**
+     * Returns the name
+     *
+     * @return String
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the name
+     *
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Returns the description
+     *
+     * @return String
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Sets the description
+     *
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Returns the problem
+     *
+     * @return String
+     */
+    public String getProblem() {
+        return problem;
+    }
+
+    /**
+     * Sets the problem
+     *
+     * @param problem
+     */
+    public void setProblem(String problem) {
+        this.problem = problem;
+    }
+
+    /**
+     * Returns the xp
+     *
+     * @return int
+     */
+    public int getXp() {
+        return xp;
+    }
+
+    /**
+     * Sets the xp
+     *
+     * @param xp
+     */
+    public void setXp(int xp) {
+        this.xp = xp;
     }
 
     /**
@@ -53,4 +145,23 @@ public class Mission implements Serializable {
     public void setLevel(int level) {
         this.level = level;
     }
+    
+    /**
+     * Returns the challenge
+     * 
+     * @return {@code List<Challenge>}
+     */
+    public List<Challenge> getChallenge() {
+        return challenge;
+    }
+
+    /**
+     * Sets the challenges
+     * 
+     * @param challenge 
+     */
+    public void setChallenge(List<Challenge> challenge) {
+        this.challenge = challenge;
+    }
+    
 }
