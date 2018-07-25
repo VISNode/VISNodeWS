@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 /**
@@ -23,6 +24,7 @@ public class ChallengeValueInput implements Serializable {
     @Column
     private String type;
     /** Value */
+    @Lob
     @Column
     private String value;
     /** Challenge */

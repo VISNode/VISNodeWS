@@ -36,7 +36,7 @@ public class Mission implements Serializable {
     private int level;
     /** Challenges */
     @OneToMany(mappedBy = "mission")
-    private List<Challenge> challenge;
+    private List<Challenge> challenges;
 
     /**
      * Returns the id
@@ -151,17 +151,17 @@ public class Mission implements Serializable {
      * 
      * @return {@code List<Challenge>}
      */
-    public List<Challenge> getChallenge() {
-        return challenge;
+    public List<Challenge> getChallenges() {
+        return challenges;
     }
 
     /**
      * Sets the challenges
      * 
-     * @param challenge 
+     * @param challenges 
      */
-    public void setChallenge(List<Challenge> challenge) {
-        this.challenge = challenge;
+    public void setChallenges(List<Challenge> challenges) {
+        this.challenges = challenges;
     }
     
 }

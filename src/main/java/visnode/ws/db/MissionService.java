@@ -63,7 +63,7 @@ public class MissionService extends AbsDBService<Mission> {
      * @param mission 
      */
     private void saveFields(Mission mission) {
-        mission.getChallenge().forEach((it) -> {
+        mission.getChallenges().forEach((it) -> {
             it.setMission(mission);
             challengeService.save(it);
         });
