@@ -78,11 +78,13 @@ public class ChallengeService extends AbsDBService<Challenge> {
      */
     private void saveFields(Challenge challenge) {
         challenge.getInput().forEach((it) -> {
+            it.setId(0);
             it.setChallenge(challenge);
             System.out.println(it.getValue().length());
             inputRepository.save(it);
         });
         challenge.getOutput().forEach((it) -> {
+            it.setId(0);
             it.setChallenge(challenge);
             System.out.println(it.getValue().length());
             outputRepository.save(it);
