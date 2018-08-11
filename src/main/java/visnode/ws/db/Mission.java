@@ -1,11 +1,14 @@
 package visnode.ws.db;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -17,14 +20,27 @@ public class Mission implements Serializable {
     /** Id */
     @Id
     @GeneratedValue
-    @Column
     private long id;
-    /** name */
+    /** Mission */
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "id_Challenge")
+    private Challenge challenge;
+    /** Name */
     @Column
     private String name;
     /** Description */
     @Column
     private String description;
+    /** Difficulty */
+    @Column
+    private int difficulty;
+    /** Input */
+    @OneToMany(mappedBy = "mission")
+    private List<MissionValueInput> input;
+    /** Output */
+    @OneToMany(mappedBy = "mission")
+    private List<MissionValueOutput> output;
     /** Problem */
     @Column
     private String problem;
@@ -34,14 +50,11 @@ public class Mission implements Serializable {
     /** Level */
     @Column
     private int level;
-    /** Challenges */
-    @OneToMany(mappedBy = "mission")
-    private List<Challenge> challenges;
 
     /**
      * Returns the id
      *
-     * @return long
+     * @return Long
      */
     public long getId() {
         return id;
@@ -54,6 +67,42 @@ public class Mission implements Serializable {
      */
     public void setId(long id) {
         this.id = id;
+    }
+
+    /**
+     * Returns the challenge
+     *
+     * @return Challenge
+     */
+    public Challenge getChallenge() {
+        return challenge;
+    }
+
+    /**
+     * Sets the challenge
+     *
+     * @param challenge
+     */
+    public void setChallenge(Challenge challenge) {
+        this.challenge = challenge;
+    }
+
+    /**
+     * Returns the level
+     *
+     * @return int
+     */
+    public int getLevel() {
+        return level;
+    }
+
+    /**
+     * Sets the level
+     *
+     * @param level
+     */
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     /**
@@ -93,6 +142,24 @@ public class Mission implements Serializable {
     }
 
     /**
+     * Returns the difficulty
+     *
+     * @return int
+     */
+    public int getDifficulty() {
+        return difficulty;
+    }
+
+    /**
+     * Sets the difficulty
+     *
+     * @param difficulty
+     */
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    /**
      * Returns the problem
      *
      * @return String
@@ -129,39 +196,39 @@ public class Mission implements Serializable {
     }
 
     /**
-     * Returns the level
+     * Returns the inputs
      *
-     * @return int
+     * @return {@code List<MissionValueInput>}
      */
-    public int getLevel() {
-        return level;
+    public List<MissionValueInput> getInput() {
+        return input;
     }
 
     /**
-     * Sets the level
+     * Sets the inputs
      *
-     * @param level
+     * @param input
      */
-    public void setLevel(int level) {
-        this.level = level;
-    }
-    
-    /**
-     * Returns the challenge
-     * 
-     * @return {@code List<Challenge>}
-     */
-    public List<Challenge> getChallenges() {
-        return challenges;
+    public void setInput(List<MissionValueInput> input) {
+        this.input = input;
     }
 
     /**
-     * Sets the challenges
-     * 
-     * @param challenges 
+     * Returns the outputs
+     *
+     * @return {@code List<MissionValueOutput>}
      */
-    public void setChallenges(List<Challenge> challenges) {
-        this.challenges = challenges;
+    public List<MissionValueOutput> getOutput() {
+        return output;
     }
-    
+
+    /**
+     * Sets the output
+     *
+     * @param output
+     */
+    public void setOutput(List<MissionValueOutput> output) {
+        this.output = output;
+    }
+
 }

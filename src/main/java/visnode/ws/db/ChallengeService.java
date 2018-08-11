@@ -13,82 +13,62 @@ import org.springframework.stereotype.Service;
 @Service
 public class ChallengeService extends AbsDBService<Challenge> {
 
-    /** Challenge input value */
-    private final ChallengeValueInputRepository inputRepository;
-    /** Challenge output value */
-    private final ChallengeValueOutputRepository outputRepository;
-
+    /** Challenge service */
+    private final MissionService missionService;
+    /** Challenge repository */
+    private final MissionRepository missionRepository;
+    
     public ChallengeService(ChallengeRepository repository,
-            ChallengeValueInputRepository inputRepository,
-            ChallengeValueOutputRepository outputRepository) {
+            MissionService challengeService,
+            MissionRepository challengeRepository) {
         super(repository);
-        this.inputRepository = inputRepository;
-        this.outputRepository = outputRepository;
+        this.missionService = challengeService;
+        this.missionRepository = challengeRepository;
     }
 
     @Override
     public Challenge save(Challenge obj) {
         Challenge challenge = super.save(obj);
-        saveFields(challenge);
+        saveFields(obj);
         return challenge;
     }
 
     @Override
     public Challenge update(Challenge obj) {
         Challenge challenge = super.update(obj);
-        deleteFields(challenge);
-        saveFields(challenge);
+        deleteFields(obj);
+        saveFields(obj);
         return challenge;
     }
 
-    @Override
-    public void delete(Challenge obj) {
-        deleteFields(obj);
-        super.delete(obj);
-    }
-
     /**
-     * Delete table field
+     * Delete the tables fields
      *
      * @param challenge
      */
     private void deleteFields(Challenge challenge) {
-        inputRepository.findAll(new Specification<ChallengeValueInput>() {
+        missionRepository.findAll(new Specification<Mission>() {
             @Override
             public Predicate toPredicate(Root root, CriteriaQuery cq, CriteriaBuilder cb) {
                 return cb.equal(root.get("challenge"), challenge);
             }
         }).forEach((it) -> {
-            inputRepository.delete(it);
-        });
-        outputRepository.findAll(new Specification<ChallengeValueOutput>() {
-            @Override
-            public Predicate toPredicate(Root root, CriteriaQuery cq, CriteriaBuilder cb) {
-                return cb.equal(root.get("challenge"), challenge);
-            }
-        }).forEach((it) -> {
-            outputRepository.delete(it);
+            missionService.delete(it);
         });
     }
 
     /**
-     * Save table fields
-     *
-     * @param challenge
+     * Save the tables fields
+     * 
+     * @param challenge 
      */
     private void saveFields(Challenge challenge) {
-        challenge.getInput().forEach((it) -> {
-            it.setId(0);
+        challenge.getMissions().forEach((it) -> {
             it.setChallenge(challenge);
-            System.out.println(it.getValue().length());
-            inputRepository.save(it);
-        });
-        challenge.getOutput().forEach((it) -> {
             it.setId(0);
-            it.setChallenge(challenge);
-            System.out.println(it.getValue().length());
-            outputRepository.save(it);
+            missionService.save(it);
         });
+
     }
 
 }

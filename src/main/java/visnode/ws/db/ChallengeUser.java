@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 
 /**
- * Challenge User
+ * Mission User
  */
 @Entity
 public class ChallengeUser implements Serializable {
@@ -26,26 +26,18 @@ public class ChallengeUser implements Serializable {
     /** User */
     private User user;
     /** Mission */
-    private long idMission;
-    /** Challenge */
     private long idChallenge;
     /** Submission */
     @Column(length = 60000)
     private String submission;
     /** Points */
     private int xp;
-    /** Date initial */
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
-    private Date dateInitial;
     /** Date final */
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private Date dateFinal;
     /** Status */
     private int status;
-    /** Level */
-    private int level;
 
     /**
      * Returns the id
@@ -84,7 +76,7 @@ public class ChallengeUser implements Serializable {
     }
 
     /**
-     * Returns the challenge identification
+     * Returns the challenge identifier
      *
      * @return long
      */
@@ -93,30 +85,12 @@ public class ChallengeUser implements Serializable {
     }
 
     /**
-     * Sets the challenge identification
+     * Sets the challenge identifier
      *
      * @param idChallenge
      */
     public void setIdChallenge(long idChallenge) {
         this.idChallenge = idChallenge;
-    }
-
-    /**
-     * Returns the mission id
-     *
-     * @return long
-     */
-    public long getIdMission() {
-        return idMission;
-    }
-
-    /**
-     * Sets the mission id
-     *
-     * @param idMission
-     */
-    public void setIdMission(long idMission) {
-        this.idMission = idMission;
     }
 
     /**
@@ -156,24 +130,6 @@ public class ChallengeUser implements Serializable {
     }
 
     /**
-     * Returns the initial date
-     *
-     * @return Date
-     */
-    public Date getDateInitial() {
-        return dateInitial;
-    }
-
-    /**
-     * Sets the initial date
-     *
-     * @param dateInitial
-     */
-    public void setDateInitial(Date dateInitial) {
-        this.dateInitial = dateInitial;
-    }
-
-    /**
      * Returns the final date
      *
      * @return Date
@@ -208,23 +164,5 @@ public class ChallengeUser implements Serializable {
     public void setStatus(int status) {
         this.status = status;
     }
-    
-    /**
-     * Returns the level
-     * 
-     * @return int
-     */
-    public int getLevel() {
-        return level;
-    }
 
-    /**
-     * Sets the level
-     * 
-     * @param level 
-     */
-    public void setLevel(int level) {
-        this.level = level;
-    }
-    
 }

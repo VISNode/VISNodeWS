@@ -1,14 +1,11 @@
 package visnode.ws.db;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 /**
@@ -20,27 +17,14 @@ public class Challenge implements Serializable {
     /** Id */
     @Id
     @GeneratedValue
+    @Column
     private long id;
-    /** Mission */
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "id_Mission")
-    private Mission mission;
-    /** Name */
+    /** name */
     @Column
     private String name;
     /** Description */
     @Column
     private String description;
-    /** Difficulty */
-    @Column
-    private int difficulty;
-    /** Input */
-    @OneToMany(mappedBy = "challenge")
-    private List<ChallengeValueInput> input;
-    /** Output */
-    @OneToMany(mappedBy = "challenge")
-    private List<ChallengeValueOutput> output;
     /** Problem */
     @Column
     private String problem;
@@ -50,11 +34,14 @@ public class Challenge implements Serializable {
     /** Level */
     @Column
     private int level;
+    /** Challenges */
+    @OneToMany(mappedBy = "challenge")
+    private List<Mission> missions;
 
     /**
      * Returns the id
      *
-     * @return Long
+     * @return long
      */
     public long getId() {
         return id;
@@ -67,42 +54,6 @@ public class Challenge implements Serializable {
      */
     public void setId(long id) {
         this.id = id;
-    }
-
-    /**
-     * Returns the mission
-     *
-     * @return Mission
-     */
-    public Mission getMission() {
-        return mission;
-    }
-
-    /**
-     * Sets the mission
-     *
-     * @param mission
-     */
-    public void setMission(Mission mission) {
-        this.mission = mission;
-    }
-
-    /**
-     * Returns the level
-     *
-     * @return int
-     */
-    public int getLevel() {
-        return level;
-    }
-
-    /**
-     * Sets the level
-     *
-     * @param level
-     */
-    public void setLevel(int level) {
-        this.level = level;
     }
 
     /**
@@ -142,24 +93,6 @@ public class Challenge implements Serializable {
     }
 
     /**
-     * Returns the difficulty
-     *
-     * @return int
-     */
-    public int getDifficulty() {
-        return difficulty;
-    }
-
-    /**
-     * Sets the difficulty
-     *
-     * @param difficulty
-     */
-    public void setDifficulty(int difficulty) {
-        this.difficulty = difficulty;
-    }
-
-    /**
      * Returns the problem
      *
      * @return String
@@ -196,39 +129,39 @@ public class Challenge implements Serializable {
     }
 
     /**
-     * Returns the inputs
+     * Returns the level
      *
-     * @return {@code List<ChallengeValueInput>}
+     * @return int
      */
-    public List<ChallengeValueInput> getInput() {
-        return input;
+    public int getLevel() {
+        return level;
     }
 
     /**
-     * Sets the inputs
+     * Sets the level
      *
-     * @param input
+     * @param level
      */
-    public void setInput(List<ChallengeValueInput> input) {
-        this.input = input;
+    public void setLevel(int level) {
+        this.level = level;
+    }
+    
+    /**
+     * Returns the missions
+     * 
+     * @return {@code List<Missions>}
+     */
+    public List<Mission> getMissions() {
+        return missions;
     }
 
     /**
-     * Returns the outputs
-     *
-     * @return {@code List<ChallengeValueOutput>}
+     * Sets the missions
+     * 
+     * @param missions
      */
-    public List<ChallengeValueOutput> getOutput() {
-        return output;
+    public void setMissions(List<Mission> missions) {
+        this.missions = missions;
     }
-
-    /**
-     * Sets the output
-     *
-     * @param output
-     */
-    public void setOutput(List<ChallengeValueOutput> output) {
-        this.output = output;
-    }
-
+    
 }

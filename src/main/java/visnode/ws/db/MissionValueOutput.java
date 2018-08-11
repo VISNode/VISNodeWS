@@ -11,10 +11,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 /**
- * Challenge value
+ * Mission value
  */
 @Entity
-public class ChallengeValueOutput implements Serializable {
+public class MissionValueOutput implements Serializable {
 
     /** Id */
     @Id
@@ -27,11 +27,11 @@ public class ChallengeValueOutput implements Serializable {
     @Lob
     @Column
     private String value;
-    /** Challenge */
+    /** Mission */
     @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "id_Challenge")
-    private Challenge challenge;
+    @JoinColumn(name = "id_Mission")
+    private Mission mission;
 
     /**
      * Returns the id
@@ -52,7 +52,7 @@ public class ChallengeValueOutput implements Serializable {
     }
 
     /**
-     * Returns the challenge type
+     * Returns the mission type
      *
      * @return ChallengeType
      */
@@ -61,7 +61,7 @@ public class ChallengeValueOutput implements Serializable {
     }
 
     /**
-     * Sets the challenge type
+     * Sets the mission type
      *
      * @param type
      */
@@ -79,7 +79,7 @@ public class ChallengeValueOutput implements Serializable {
     }
 
     /**
-     * Sets the challenge value
+     * Sets the mission value
      *
      * @param value
      */
@@ -88,21 +88,21 @@ public class ChallengeValueOutput implements Serializable {
     }
 
     /**
-     * Returns the challenge
+     * Returns the mission
      *
-     * @return Challenge
+     * @return Mission
      */
-    public Challenge getChallenge() {
-        return challenge;
+    public Mission getMission() {
+        return mission;
     }
 
     /**
-     * Sets the challenge
+     * Sets the mission
      *
-     * @param challenge
+     * @param mission
      */
-    public void setChallenge(Challenge challenge) {
-        this.challenge = challenge;
+    public void setMission(Mission mission) {
+        this.mission = mission;
     }
 
 }
