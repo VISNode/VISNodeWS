@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 /**
@@ -34,6 +35,13 @@ public class Challenge implements Serializable {
     /** Level */
     @Column
     private int level;
+    /** Payment */
+    @Lob
+    @Column
+    private String payment;
+    /** Puzzle */
+    @Column
+    private String puzzle;     
     /** Challenges */
     @OneToMany(mappedBy = "challenge")
     private List<Mission> missions;
@@ -144,6 +152,42 @@ public class Challenge implements Serializable {
      */
     public void setLevel(int level) {
         this.level = level;
+    }
+    
+    /**
+     * Returns the payment
+     * 
+     * @return String
+     */
+    public String getPayment() {
+        return payment;
+    }
+
+    /**
+     * Sets the payment
+     * 
+     * @param payment 
+     */
+    public void setPayment(String payment) {
+        this.payment = payment;
+    }
+
+    /**
+     * Returns the puzzle
+     * 
+     * @return String
+     */
+    public String getPuzzle() {
+        return puzzle;
+    }
+
+    /**
+     * Sets the puzzle
+     * 
+     * @param puzzle 
+     */
+    public void setPuzzle(String puzzle) {
+        this.puzzle = puzzle;
     }
     
     /**

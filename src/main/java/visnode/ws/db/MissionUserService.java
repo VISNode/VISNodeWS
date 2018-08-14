@@ -75,7 +75,7 @@ public class MissionUserService extends AbsDBService<MissionUser> {
      * @param user
      */
     private void updateChallenge(MissionUser missionUser, User user) {
-        Mission mission = missionRepository.findOne(missionUser.getIdChallenge());
+        Mission mission = missionRepository.findOne(missionUser.getIdMission());
         Challenge challenge = challengeRepository.findOne(mission.getChallenge().getId());
         //Ifs not the final level
         if (challenge.getLevel() != mission.getLevel()) {
