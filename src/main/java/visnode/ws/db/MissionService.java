@@ -36,8 +36,8 @@ public class MissionService extends AbsDBService<Mission> {
     @Override
     public Mission update(Mission obj) {
         Mission challenge = super.update(obj);
-        deleteFields(challenge);
-        saveFields(challenge);
+        deleteFields(obj);
+        saveFields(obj);
         return challenge;
     }
 
@@ -59,7 +59,7 @@ public class MissionService extends AbsDBService<Mission> {
                 return cb.equal(root.get("mission"), challenge);
             }
         }).forEach((it) -> {
-            inputRepository.delete(it);
+                inputRepository.delete(it);
         });
         outputRepository.findAll(new Specification<MissionValueOutput>() {
             @Override
@@ -67,7 +67,7 @@ public class MissionService extends AbsDBService<Mission> {
                 return cb.equal(root.get("mission"), challenge);
             }
         }).forEach((it) -> {
-            outputRepository.delete(it);
+                outputRepository.delete(it);
         });
     }
 

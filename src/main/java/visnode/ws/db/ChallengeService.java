@@ -17,7 +17,7 @@ public class ChallengeService extends AbsDBService<Challenge> {
     private final MissionService missionService;
     /** Challenge repository */
     private final MissionRepository missionRepository;
-    
+
     public ChallengeService(ChallengeRepository repository,
             MissionService challengeService,
             MissionRepository challengeRepository) {
@@ -53,20 +53,27 @@ public class ChallengeService extends AbsDBService<Challenge> {
                 return cb.equal(root.get("challenge"), challenge);
             }
         }).forEach((it) -> {
-            missionService.delete(it);
+            if (!challenge.getMissions().
+                    stream().
+                    anyMatch((m) -> m.getId() == it.getId())) {
+                missionService.delete(it);
+            }
         });
     }
 
     /**
      * Save the tables fields
-     * 
-     * @param challenge 
+     *
+     * @param challenge
      */
     private void saveFields(Challenge challenge) {
         challenge.getMissions().forEach((it) -> {
             it.setChallenge(challenge);
-            it.setId(0);
-            missionService.save(it);
+            if (it.getId() == 0) {
+                missionService.save(it);
+            } else {
+                missionService.update(it);
+            }
         });
 
     }
