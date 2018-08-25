@@ -23,12 +23,12 @@ public class User implements Serializable {
     /** Name */
     @Column(unique = true)
     @NotNull
-    @Size(min=5, max = 50)
+    @Size(min = 5, max = 50)
     private String name;
     /** Password */
     @Column
     @NotNull
-    @Size(min=5, max = 32)
+    @Size(min = 5, max = 32)
     private String password;
     /** Points */
     @Column

@@ -28,11 +28,11 @@ public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
             if (method.hasMethodAnnotation(OpenAccess.class)) {
                 return super.preHandle(hsr, response, o);
             }
-//            if (tokenService.isValid(hsr.getHeader(AuthenticationToken.HEADER))) {
+            if (tokenService.isValid(hsr.getHeader(AuthenticationToken.HEADER))) {
                 return super.preHandle(hsr, response, o);
-//            }
-//            response.setStatus(HttpStatus.UNAUTHORIZED.value());
-//            return false;
+            }
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            return false;
         }
         return super.preHandle(hsr, response, o);
     }
